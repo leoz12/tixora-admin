@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-21T00:00:00.000Z",
+  "title": "Design System: Tixora Admin",
+  "extensions": {
+    "colorMeta": {
+      "primary": { "role": "primary", "displayName": "Terminal Blue", "canonical": "oklch(0.546 0.245 262.881)" },
+      "accent": { "role": "neutral", "displayName": "Cool Mist", "canonical": "oklch(0.965 0.02 255)" },
+      "accent-foreground": { "role": "primary", "displayName": "Terminal Blue (text-on-mist)", "canonical": "oklch(0.488 0.243 264.376)" },
+      "border": { "role": "neutral", "displayName": "Hairline", "canonical": "oklch(0.916 0.008 258)" },
+      "muted-foreground": { "role": "neutral", "displayName": "Slate Muted", "canonical": "oklch(0.51 0.017 258)" },
+      "sidebar": { "role": "neutral", "displayName": "Sidebar Fog", "canonical": "oklch(0.99 0.003 258)" },
+      "status-success-fg": { "role": "neutral", "displayName": "Status Green", "canonical": "#047857" },
+      "status-warning-fg": { "role": "neutral", "displayName": "Status Amber", "canonical": "#b45309" }
+    },
+    "typographyMeta": {
+      "heading": { "displayName": "Page Title", "purpose": "One per page, top of the content column." },
+      "data": { "displayName": "Tabular Data", "purpose": "Order numbers, IDs, prices, counts, dates inside tables." }
+    },
+    "shadows": [
+      { "name": "floating", "value": "0 4px 12px rgba(15, 23, 42, 0.08)", "purpose": "Dropdown menus, popovers, dialogs, and the mobile sidebar sheet only — never resting cards." }
+    ],
+    "motion": [
+      { "name": "ease-standard", "value": "cubic-bezier(0.4, 0, 0.2, 1)", "purpose": "Default transition for color/border/opacity state changes (hover, focus, active)." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "lg", "value": "1024px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one blue action per view — submit, create, confirm.",
+      "html": "<button class=\"ds-btn-primary\">Create event</button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 0.375rem; height: 2.25rem; padding: 0 1rem; border-radius: 0.5rem; border: 1px solid transparent; background: oklch(0.546 0.245 262.881); color: oklch(0.985 0 0); font-size: 0.875rem; font-weight: 500; font-family: 'Geist Sans', ui-sans-serif, system-ui, sans-serif; transition: background 0.15s cubic-bezier(0.4,0,0.2,1), transform 0.1s; } .ds-btn-primary:hover { background: color-mix(in oklch, oklch(0.546 0.245 262.881) 88%, black); } .ds-btn-primary:focus-visible { outline: none; border-color: oklch(0.546 0.245 262.881); box-shadow: 0 0 0 3px oklch(0.546 0.245 262.881 / 50%); } .ds-btn-primary:disabled { opacity: 0.5; pointer-events: none; }"
+    },
+    {
+      "name": "Ghost Icon Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Secondary/tertiary row and header actions (edit, delete, menu trigger) — the interface's default button.",
+      "html": "<button class=\"ds-btn-ghost\" aria-label=\"Edit\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z\"/></svg></button>",
+      "css": ".ds-btn-ghost { display: inline-flex; align-items: center; justify-content: center; width: 2.25rem; height: 2.25rem; border-radius: 0.4rem; border: none; background: transparent; color: oklch(0.18 0.014 258); transition: background 0.15s cubic-bezier(0.4,0,0.2,1); } .ds-btn-ghost:hover { background: oklch(0.968 0.003 258); } .ds-btn-ghost:focus-visible { outline: none; box-shadow: 0 0 0 3px oklch(0.546 0.245 262.881 / 50%); }"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Default field control, paired with an explicit label above it.",
+      "html": "<div class=\"ds-field\"><label class=\"ds-field-label\" for=\"ds-demo-input\">Name</label><input id=\"ds-demo-input\" class=\"ds-input\" placeholder=\"Music, Sports, Conference...\" /></div>",
+      "css": ".ds-field { display: flex; flex-direction: column; gap: 0.375rem; font-family: 'Geist Sans', ui-sans-serif, system-ui, sans-serif; } .ds-field-label { font-size: 0.75rem; font-weight: 500; color: oklch(0.18 0.014 258); } .ds-input { height: 2rem; padding: 0.25rem 0.625rem; border-radius: 0.5rem; border: 1px solid oklch(0.916 0.008 258); background: transparent; font-size: 0.875rem; color: oklch(0.18 0.014 258); outline: none; transition: border-color 0.15s, box-shadow 0.15s; } .ds-input::placeholder { color: oklch(0.51 0.017 258); } .ds-input:focus-visible { border-color: oklch(0.546 0.245 262.881); box-shadow: 0 0 0 3px oklch(0.546 0.245 262.881 / 50%); }"
+    },
+    {
+      "name": "Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "The only container surface; flat, bordered, never shadowed at rest.",
+      "html": "<div class=\"ds-card\"><p class=\"ds-card-label\">Total events</p><p class=\"ds-card-value\">128</p></div>",
+      "css": ".ds-card { background: oklch(1 0 0); border: 1px solid oklch(0.916 0.008 258); border-radius: 0.5rem; padding: 1rem 1.25rem; font-family: 'Geist Sans', ui-sans-serif, system-ui, sans-serif; transition: border-color 0.15s; } .ds-card:hover { border-color: oklch(0.546 0.245 262.881 / 40%); } .ds-card-label { font-size: 0.875rem; color: oklch(0.51 0.017 258); margin: 0 0 0.125rem; } .ds-card-value { font-size: 1.5rem; font-weight: 600; color: oklch(0.18 0.014 258); margin: 0; font-variant-numeric: tabular-nums; }"
+    },
+    {
+      "name": "Status Badge",
+      "kind": "chip",
+      "refersTo": "status-badge",
+      "description": "Order/event state pill. Green = positive/live, amber = pending/draft, gray = closed, red = failed/expired. Never rendered in the brand blue.",
+      "html": "<span class=\"ds-badge ds-badge-success\">Paid</span>",
+      "css": ".ds-badge { display: inline-flex; align-items: center; height: 1.25rem; padding: 0 0.5rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 500; font-family: 'Geist Sans', ui-sans-serif, system-ui, sans-serif; white-space: nowrap; } .ds-badge-success { background: oklch(0.977 0.03 155 / 40%); color: #047857; } .ds-badge-warning { background: oklch(0.97 0.05 90 / 40%); color: #b45309; } .ds-badge-neutral { background: oklch(0.968 0.003 258); color: oklch(0.51 0.017 258); }"
+    },
+    {
+      "name": "Sidebar Nav Item",
+      "kind": "nav",
+      "refersTo": "sidebar-nav-item-active",
+      "description": "Icon + label nav row; active state uses Cool Mist background and Terminal-Blue-tinted text, never a bare blue fill.",
+      "html": "<a class=\"ds-nav-item ds-nav-item-active\" href=\"#\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"3\" y=\"3\" width=\"7\" height=\"7\"/><rect x=\"14\" y=\"3\" width=\"7\" height=\"7\"/><rect x=\"14\" y=\"14\" width=\"7\" height=\"7\"/><rect x=\"3\" y=\"14\" width=\"7\" height=\"7\"/></svg>Overview</a>",
+      "css": ".ds-nav-item { display: flex; align-items: center; gap: 0.625rem; border-radius: 0.4rem; padding: 0.5rem 0.75rem; font-size: 0.875rem; font-weight: 500; font-family: 'Geist Sans', ui-sans-serif, system-ui, sans-serif; color: oklch(0.24 0.02 258 / 70%); text-decoration: none; transition: background 0.15s, color 0.15s; } .ds-nav-item:hover { background: oklch(0.965 0.02 255 / 60%); color: oklch(0.24 0.02 258); } .ds-nav-item-active { background: oklch(0.965 0.02 255); color: oklch(0.488 0.243 264.376); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Category Standard, Played Straight",
+    "overview": "This is not a designed world — it's a deliberate refusal of one. Offered a set of distinctive visual directions rooted in the ticketing/box-office domain (terminal wayfinding signage, ticket-stub ledgers), the product owner chose the category-standard admin convention instead, explicitly asking for something that looks like admin dashboards in general. The craft bar is Linear: generous whitespace, precise type, a single restrained blue accent, and components executed at default radius without ornament. Nothing here should surprise a user who has used any modern SaaS admin panel before. The palette is Restrained: near-white and near-black neutrals carry the interface, with one blue reserved for primary actions, the current navigation item, links, and focus rings. A second, barely-cooler neutral distinguishes the sidebar from the content area without introducing a second brand color. Status (order/event state) uses a small, standardized semantic vocabulary — green/amber/neutral/red — never the brand blue, so state and action never compete for the same signal.",
+    "keyCharacteristics": [
+      "One sans family (Geist Sans) for every UI role; monospace (Geist Mono) reserved for order numbers and tabular numeric data.",
+      "Fixed rem type scale, not fluid — a desktop admin tool viewed at consistent DPI.",
+      "Default shadcn/ui component radius and elevation; no custom chrome invented for flavor.",
+      "Blue is functional, not decorative: primary actions, active nav, links, focus rings, and nothing else."
+    ],
+    "rules": [
+      { "name": "The One Blue Rule", "body": "Terminal Blue appears only on primary actions, the active nav item, links, and focus rings. It never appears as a status color, a decorative fill, or a hover tint outside those roles.", "section": "colors" },
+      { "name": "The Single-Family Rule", "body": "One sans carries the whole interface. A second display face is never introduced for a heading, a button, or a stat number.", "section": "typography" },
+      { "name": "The Border-Not-Shadow Rule", "body": "Static surfaces (cards, table containers, the sidebar) separate from the page with a 1px border. Shadow is reserved for content that floats above the layout: menus, dialogs, sheets.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do keep Terminal Blue to primary actions, the active nav item, links, and focus rings only.",
+      "Do use the status badge vocabulary (green/amber/neutral/red) for every order/event state, and only for state.",
+      "Do separate static surfaces with a 1px Hairline border, not a shadow.",
+      "Do pair every form input with an explicit visible label via Field/FieldLabel.",
+      "Do route every delete action through ConfirmDialog before the mutation fires."
+    ],
+    "donts": [
+      "Don't introduce a second display font or a second brand accent color — this system is deliberately one voice, one blue.",
+      "Don't add shadows to resting cards, the sidebar, or the table container.",
+      "Don't use Terminal Blue as a status/semantic color.",
+      "Don't fire a destructive mutation directly from a row action without the confirm dialog."
+    ]
+  }
+}
