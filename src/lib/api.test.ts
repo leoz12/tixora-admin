@@ -2,54 +2,6 @@ import MockAdapter from "axios-mock-adapter";
 import { api } from "@/lib/api";
 import { useAdminAuth } from "@/lib/store/auth.store";
 
-const CSRF_COOKIE_NAME = "tx_admin_csrf_token";
-
-function setCsrfCookie(value: string | null) {
-  document.cookie = `${CSRF_COOKIE_NAME}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/`;
-  if (value) {
-    document.cookie = `${CSRF_COOKIE_NAME}=${value}; path=/`;
-  }
-}
-
-describe("api CSRF request interceptor", () => {
-  let mock: MockAdapter;
-
-  beforeEach(() => {
-    mock = new MockAdapter(api);
-    setCsrfCookie(null);
-  });
-
-  afterEach(() => {
-    mock.restore();
-  });
-
-  it("echoes the CSRF cookie as a header on POST requests", async () => {
-    setCsrfCookie("csrf-abc");
-    mock.onPost("/events").reply(200, { data: {} });
-
-    await api.post("/events", { title: "test" });
-
-    expect(mock.history.post[0].headers?.["X-CSRF-Token"]).toBe("csrf-abc");
-  });
-
-  it("does not add the header on GET requests", async () => {
-    setCsrfCookie("csrf-abc");
-    mock.onGet("/events").reply(200, { data: [] });
-
-    await api.get("/events");
-
-    expect(mock.history.get[0].headers?.["X-CSRF-Token"]).toBeUndefined();
-  });
-
-  it("omits the header when no CSRF cookie is set", async () => {
-    mock.onDelete("/events/1").reply(204);
-
-    await api.delete("/events/1");
-
-    expect(mock.history.delete[0].headers?.["X-CSRF-Token"]).toBeUndefined();
-  });
-});
-
 describe("api response interceptor - silent refresh", () => {
   let mock: MockAdapter;
   // jsdom's `window.location` accessor is non-configurable, so it can't be

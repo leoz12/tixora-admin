@@ -13,28 +13,10 @@ export const api = axios.create({
   timeout: 10_000,
 });
 
-const CSRF_COOKIE_NAME = "tx_admin_csrf_token";
-const UNSAFE_METHODS = new Set(["post", "put", "patch", "delete"]);
-
-function readCookie(name: string): string | null {
-  if (typeof document === "undefined") return null;
-  const match = document.cookie.match(new RegExp(`(?:^|; )${name}=([^;]*)`));
-  return match ? decodeURIComponent(match[1]) : null;
-}
-
-// Double-submit CSRF: the backend also set a non-httpOnly CSRF cookie
-// alongside the auth cookies, readable here and echoed back as a header on
-// state-changing requests.
-api.interceptors.request.use((config) => {
-  const method = config.method?.toLowerCase();
-  if (method && UNSAFE_METHODS.has(method)) {
-    const csrfToken = readCookie(CSRF_COOKIE_NAME);
-    if (csrfToken) {
-      config.headers["X-CSRF-Token"] = csrfToken;
-    }
-  }
-  return config;
-});
+// CSRF is enforced server-side by an Origin/Referer allowlist (the SPA and API
+// are on different registrable domains, so a double-submit cookie could never
+// work — the frontend JS can't read the API's cookie). Nothing to send from
+// here beyond the credentialed cookies; `withCredentials: true` covers it.
 
 // A burst of concurrent requests that all hit a 401 (expired access token)
 // should trigger exactly one /admin/auth/refresh call, not one per request.
