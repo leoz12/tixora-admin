@@ -1,7 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Menu, LogOut } from "lucide-react";
+import { Menu, LogOut, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -81,6 +82,13 @@ export default function Header() {
               <span className="text-xs text-muted-foreground">{admin?.email ?? ""}</span>
             </div>
           </DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem asChild>
+            <Link href="/dashboard/settings">
+              <Settings className="h-4 w-4" />
+              Settings
+            </Link>
+          </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem variant="destructive" onClick={handleLogout}>
             <LogOut className="h-4 w-4" />

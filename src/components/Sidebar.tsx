@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, CalendarDays, Tags, Receipt, Users } from "lucide-react";
+import { LayoutDashboard, CalendarDays, Tags, Receipt, Users, Settings } from "lucide-react";
 import { cn } from "@/lib/utils";
 import TixoraMark from "@/components/icons/TixoraMark";
 
@@ -12,6 +12,7 @@ const NAV_ITEMS = [
   { href: "/dashboard/categories", label: "Categories", icon: Tags },
   { href: "/dashboard/orders", label: "Orders", icon: Receipt },
   { href: "/dashboard/customers", label: "Customers", icon: Users },
+  { href: "/dashboard/settings", label: "Settings", icon: Settings },
 ];
 
 function isActive(pathname: string, href: string, exact?: boolean) {

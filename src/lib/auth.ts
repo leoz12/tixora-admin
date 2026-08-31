@@ -15,6 +15,16 @@ export async function fetchCurrentAdmin() {
   return response.data.data;
 }
 
+// Changes the current admin's password. The backend revokes every *other*
+// session but keeps this one alive (the auth cookies are rotated in place),
+// so a successful change leaves the admin logged in here.
+export async function changePassword(data: {
+  current_password: string;
+  new_password: string;
+}) {
+  await api.post("/admin/auth/change-password", data);
+}
+
 // Revokes the refresh token server-side. Best-effort - the caller clears
 // local auth state regardless of whether this succeeds.
 export async function logoutRequest() {

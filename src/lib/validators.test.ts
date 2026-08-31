@@ -1,4 +1,9 @@
-import { CategorySchema, EventSchema, LoginSchema } from "@/lib/validators";
+import {
+  CategorySchema,
+  ChangePasswordSchema,
+  EventSchema,
+  LoginSchema,
+} from "@/lib/validators";
 
 describe("LoginSchema", () => {
   it("accepts a valid email and password", () => {
@@ -31,6 +36,47 @@ describe("LoginSchema", () => {
         "Password must be at least 6 characters"
       );
     }
+  });
+});
+
+describe("ChangePasswordSchema", () => {
+  const valid = {
+    current_password: "old-password",
+    new_password: "brand-new-password",
+    confirm_password: "brand-new-password",
+  };
+
+  it("accepts a valid change", () => {
+    expect(ChangePasswordSchema.safeParse(valid).success).toBe(true);
+  });
+
+  it("rejects a new password shorter than 8 characters", () => {
+    const result = ChangePasswordSchema.safeParse({
+      ...valid,
+      new_password: "short",
+      confirm_password: "short",
+    });
+    expect(result.success).toBe(false);
+  });
+
+  it("rejects when the confirmation does not match", () => {
+    const result = ChangePasswordSchema.safeParse({
+      ...valid,
+      confirm_password: "different-password",
+    });
+    expect(result.success).toBe(false);
+    if (!result.success) {
+      expect(result.error.issues[0].message).toBe("Passwords do not match");
+    }
+  });
+
+  it("rejects when the new password equals the current one", () => {
+    const result = ChangePasswordSchema.safeParse({
+      current_password: "same-password",
+      new_password: "same-password",
+      confirm_password: "same-password",
+    });
+    expect(result.success).toBe(false);
   });
 });
 
