@@ -24,11 +24,17 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
 
       - name: Install dependencies
         run: npm ci
+
+      # Next 16 generates route/page/layout types (LayoutProps<>, PageProps<>,
+      # etc.) into .next/types. tsc and eslint need them, and they don't exist
+      # on a fresh checkout, so generate them before lint/typecheck.
+      - name: Generate Next types
+        run: npx next typegen
 
       - name: Lint
         run: npm run lint
